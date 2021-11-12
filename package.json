@@ -4,7 +4,7 @@
   "description": "An experimental rxjs state management library",
   "main": "rxjs-state.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "build": "rimraf dist && rollup -c ./rollup.config.js"
   },
   "author": "Justin McMurdie",
@@ -19,6 +19,7 @@
     "@rollup/plugin-commonjs": "^21.0.1",
     "@rollup/plugin-node-resolve": "^13.0.6",
     "@rollup/plugin-replace": "^3.0.0",
+    "jest": "^27.3.1",
     "rimraf": "^3.0.2",
     "rollup": "^2.60.0",
     "rollup-plugin-serve": "^1.1.0"
