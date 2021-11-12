@@ -49,18 +49,20 @@ describe(`createRxjsStateWithReducer`, () => {
       replay: false,
     })
     addSub(state$.subscribe(fn1))
+    fireEvent({ type: 'RESET' })
     fireEvent({ type: 'ADD', payload: 2 })
     fireEvent({ type: 'ADD', payload: 1 })
     fireEvent({ type: 'RESET' })
+    addSub(state$.subscribe(fn2))
     fireEvent({ type: 'ADD', payload: 1 })
     fireEvent({ type: 'RESET' })
     fireEvent({ type: 'SET', payload: 4 })
-    const expectedValues1 = [0, 2, 3, 0, 1, 0, 4]
-    // const expectedValues2 = [4, -1, 16, 11]
+    const expectedValues1 = [undefined, 0, 2, 3, 0, 1, 0, 4]
+    const expectedValues2 = [undefined, NaN, 0, 4]
     return new Promise((r) => {
       setTimeout(() => {
         expect(actualValues1).toStrictEqual(expectedValues1)
-        // expect(actualValues2).toStrictEqual(expectedValues2)
+        expect(actualValues2).toStrictEqual(expectedValues2)
         r()
       }, 250)
     })

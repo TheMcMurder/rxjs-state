@@ -1,5 +1,5 @@
 import { ReplaySubject, BehaviorSubject, Subject } from 'rxjs'
-import { scan, startWith, shareReplay } from 'rxjs/operators'
+import { tap, scan, startWith, shareReplay } from 'rxjs/operators'
 
 export function createRxjsStateWithReducer(config) {
   const { replay = true, initialValue, reducerFn } = config
@@ -9,7 +9,7 @@ export function createRxjsStateWithReducer(config) {
     .pipe(
       startWith(initialValue),
       scan(reducerFn),
-      replay ? shareReplay(1) : undefined,
+      replay ? shareReplay(1) : tap(),
     )
 
   const fireEvent = (evt) => base$.next(evt)
