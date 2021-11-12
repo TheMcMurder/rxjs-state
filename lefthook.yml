@@ -1,0 +1,10 @@
+pre-commit:
+  commands:
+    lint-fix:
+      glob: "*.{js,ts}"
+      run: npm run lint:fix {staged_files} && git add {staged_files}
+
+pre-push:
+  commands:
+    js:
+      run: npm test
